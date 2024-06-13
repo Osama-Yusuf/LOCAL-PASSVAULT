@@ -25,8 +25,8 @@ This project uses several open-source packages:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/pass-vault.git
-cd pass-vault
+git clone https://github.com/osama-yusuf/local-passvault.git
+cd local-passvault
 ```
 
 Since this project is purely frontend, open the project directory in a development server. You can use Node.js `http-server` or Python's simple HTTP server. Here's how you can do it with `http-server`:
