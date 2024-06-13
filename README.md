@@ -78,6 +78,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [ ] enhance add/edit modal UI/UX
 - [ ] generate password
 
-inspiration:
+### inspiration:
 - [LocalVault by ssambender](https://github.com/ssambender/LocalVault)
 - [password-manager by mrdcvlsc](https://github.com/mrdcvlsc/password-manager)
