@@ -75,7 +75,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [ ] enhance security by 
   - [ ] encrypting the passwords before setting them inside the localstorage
   - [ ] limit loggged in session length
-- [ ] enhance add/edit modal UI/UX 
+- [ ] enhance add/edit modal UI/UX
+- [ ] generate password
 
 inpiration:
 - [LocalVault by ssambender](https://github.com/ssambender/LocalVault)
