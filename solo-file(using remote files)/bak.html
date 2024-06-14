@@ -148,7 +148,7 @@
                 setUsername('');
                 setPassword('');
             };
-            
+
             useEffect(() => {
                 localStorage.setItem('isLoggedIn', isLoggedIn);
                 const handleEscape = (event) => {
@@ -264,15 +264,15 @@
                                 <div className="text-5xl">PASS VAULT 🛡️</div>
                             </div>
 
-                        <form onSubmit={isRegistering ? handleRegister : handleLogin}>
-                            <h1 className="text-lg font-bold">{isRegistering ? "Register" : "Login"}</h1>
-                            <input style={{color: "black"}} className="border p-2 w-full mt-2 text-black" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                            <input style={{color: "black"}} className="border p-2 w-full mt-2 text-black" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                            <button className="bg-blue-500 text-white p-2 w-full mt-2" type="submit">{isRegistering ? "Register" : "Login"}</button>
-                            <button className="text-white underline p-2 w-full mt-2" type="button" onClick={toggleRegister}>
-                                {isRegistering ? "Go to Login" : "Go to Register"}
-                            </button>
-                        </form>
+                            <form onSubmit={isRegistering ? handleRegister : handleLogin}>
+                                <h1 className="text-lg font-bold">{isRegistering ? "Register" : "Login"}</h1>
+                                <input style={{ color: "black" }} className="border p-2 w-full mt-2 text-black" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <input style={{ color: "black" }} className="border p-2 w-full mt-2 text-black" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <button className="bg-blue-500 text-white p-2 w-full mt-2" type="submit">{isRegistering ? "Register" : "Login"}</button>
+                                <button className="text-white underline p-2 w-full mt-2" type="button" onClick={toggleRegister}>
+                                    {isRegistering ? "Already have an account? Login" : "New around here? Create account"}
+                                </button>
+                            </form>
                         </div>
                     ) : (
                         <div className="mx-auto">
