@@ -248,9 +248,10 @@
                 setShowPassword(prev => ({ ...prev, [index]: !prev[index] }));
             };
 
-            const copyToClipboard = text => {
+            const copyToClipboard = (text, type) => {
+                let message = type === 'username' ? 'Username copied to clipboard!' : 'Password copied to clipboard!';
                 navigator.clipboard.writeText(text).then(() => {
-                    showToast("Password copied to clipboard!", "#00b09b", "#96c93d");
+                    showToast(message, "#00b09b", "#96c93d");
                 }, () => {
                     showToast("Failed to copy!", "#DC3545", "#DC3547");
                 });
@@ -307,7 +308,11 @@
                                         <tr key={index}>
                                             <td>{entry.site}</td>
                                             <td><a href={`https://${entry.url}`} target="_blank" className="underline">{entry.url}</a></td>
-                                            <td>{entry.user}</td>
+                                            <td>
+                                                <span onClick={() => copyToClipboard(entry.user, 'username')} className="cursor-pointer">
+                                                    {entry.user}
+                                                </span>
+                                            </td>
                                             <td>
                                                 <span onClick={() => copyToClipboard(entry.password)} className="cursor-pointer">
                                                     {showPassword[index] ? entry.password : '••••••'}
