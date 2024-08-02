@@ -32,6 +32,27 @@
             color: white;
         }
 
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(37, 77, 102, 0.95);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        .sidebar.show {
+            transform: translateX(0);
+        }
+        .gear-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
         .modal {
             position: fixed;
             top: 0;
@@ -103,6 +124,11 @@
             cursor: pointer;
             transition: 0.4s;
         }
+
+        img {
+            width: 37px;
+            height: 37px;
+        }
     </style>
 </head>
 
@@ -129,6 +155,8 @@
             const [username, setUsername] = useState('');
             const [password, setPassword] = useState('');
             const [isRegistering, setRegistering] = useState(false);
+            const [showSidebar, setShowSidebar] = useState(false);
+
 
             const handleRegister = (event) => {
                 event.preventDefault();
@@ -154,6 +182,7 @@
                 const handleEscape = (event) => {
                     if (event.key === 'Escape') {
                         setShowModal(false);
+                        setShowSidebar(false);
                     }
                 };
 
@@ -263,6 +292,27 @@
                 setPasswords(newPasswords);
                 showToast(`${passwords[index].site} Password deleted!`, "#00b09b", "#96c93d");
             };
+            const importPasswords = event => {
+                const fileReader = new FileReader();
+                fileReader.readAsText(event.target.files[0], "UTF-8");
+                fileReader.onload = e => {
+                    const importedPasswords = JSON.parse(e.target.result);
+                    setPasswords(importedPasswords);
+                    localStorage.setItem('passwords', JSON.stringify(importedPasswords));
+                    showToast("Passwords imported successfully!", "#00b09b", "#96c93d");
+                };
+            };
+
+            const exportPasswords = () => {
+                const dataStr = JSON.stringify(passwords);
+                const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+                let exportFileDefaultName = 'passwords.json';
+                let linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+                showToast("Passwords exported successfully!", "#00b09b", "#96c93d");
+            };
             return (
                 <div className="container mx-auto">
                     {!isLoggedIn ? (
@@ -283,6 +333,11 @@
                         </div>
                     ) : (
                         <div className="mx-auto">
+                            <img src="https://cdn-icons-png.flaticon.com/256/771/771203.png" className="gear-icon" alt="Settings" onClick={() => setShowSidebar(!showSidebar)} />
+                            <div className={`sidebar ${showSidebar ? 'show' : ''}`}>
+                                <button onClick={exportPasswords} className="bg-blue-500 text-white p-2 m-2">Export Passwords</button>
+                                <input type="file" onChange={importPasswords} className="bg-blue-500 text-white p-2 m-2"/>
+                            </div>
                             <div className="flex justify-between items-center p-1 mt-2">
                                 <h1 className="text-lg font-bold">Hello, {userName || "User"}!</h1>
                                 <button className="text-white underline" onClick={() => setLoggedIn(false)}>Logout</button>
